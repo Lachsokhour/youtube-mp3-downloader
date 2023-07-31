@@ -3,5 +3,5 @@ sudo pip install --upgrade --force-reinstall "git+https://github.com/ytdl-org/yo
 ```
 
 ```
-pyinstaller --onefile main.py --icon="icon.ico"
+pyinstaller --onefile youtube-mp3-downloader.py --icon="icon.ico"
 ```

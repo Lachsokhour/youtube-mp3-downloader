@@ -1,6 +1,7 @@
 import youtube_dl
 import tkinter as tk
 from tkinter import filedialog
+from PIL import Image, ImageTk
 
 def download_audio():
     link = entry_link.get()
@@ -40,17 +41,28 @@ def browse_folder():
 # GUI setup
 root = tk.Tk()
 root.title("YouTube Downloader")
-root.geometry("700x400")  # Set the initial size of the window (width x height)
+root.geometry("700x500")  # Set the initial size of the window (width x height)
 
 file_path = tk.StringVar()
+
+# Load the logo image using Pillow and resize it to a smaller size
+logo_image = Image.open("mp3.png")  # Replace "your_logo.png" with the actual image file name or path
+logo_image = logo_image.resize((90, 90))  # Replace 100x100 with the desired width and height
+
+# Convert the resized image to a PhotoImage object
+logo_image = ImageTk.PhotoImage(logo_image)
+
+# Create a Label widget to display the logo
+logo_label = tk.Label(root, image=logo_image)
+logo_label.pack()
 
 label_link = tk.Label(root, text="Please enter your YouTube video link:", font=("Arial", 14), bd=2)
 label_link.pack(pady=5)  # Add padding at the top
 
-entry_link = tk.Entry(root, width=50, font=("Arial", 12), bd=1)  # Adjust the width, add height and border thickness
+entry_link = tk.Entry(root, width=40, font=("Arial", 12), bd=1)  # Adjust the width, add height and border thickness
 entry_link.pack(ipady=10, pady=5)  # Add internal and external padding
 
-label_save = tk.Label(root, text="Save location:")
+label_save = tk.Label(root, font=("Arial", 12), text="Save location:")
 label_save.pack(pady=5)  # Add padding between the label and entry box
 
 entry_save = tk.Entry(root, textvariable=file_path, width=40, font=("Arial", 12), bd=1)  # Adjust the width, add height and border thickness
@@ -65,5 +77,9 @@ btn_download.pack(pady=5)  # Add padding at the bottom
 # Label to display progress or success message
 progress_label = tk.Label(root, fg="green")
 progress_label.pack()
+
+# Add a label at the left bottom
+left_bottom_label = tk.Label(root,fg="red", text="Copyright: LACH Sokhour", font=("Arial", 11))
+left_bottom_label.pack(side=tk.RIGHT, padx=10, pady=10, anchor=tk.SW)
 
 root.mainloop()
